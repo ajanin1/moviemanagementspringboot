@@ -18,13 +18,12 @@ public class Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
-		Film f = new Film(0, "Tarzan", LocalDate.of(2000, Month.APRIL, 30), BigDecimal.valueOf(123456.12));
-		
-		Film f2 = Film.builder()
-				.ad("Hulk")
-				.vizyonTarihi(LocalDate.now())
-				.hasilat(BigDecimal.valueOf(345678.89))
-				.build();
+//		Film f = new Film(0, "Tarzan", LocalDate.of(2000, Month.APRIL, 30), BigDecimal.valueOf(123456.12),null);
+//		Film f2 = Film.builder()
+//				.ad("Hulk")
+//				.vizyonTarihi(LocalDate.now())
+//				.hasilat(BigDecimal.valueOf(345678.89))
+//				.build();
 	}
 
 }

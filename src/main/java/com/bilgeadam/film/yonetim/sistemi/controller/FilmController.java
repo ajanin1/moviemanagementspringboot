@@ -3,6 +3,8 @@ package com.bilgeadam.film.yonetim.sistemi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,14 +31,24 @@ public class FilmController {
 		return filmService.filmListesi();
 	}
 	
-	@GetMapping(path="{id}")
+	@GetMapping//(path="{id}")
+	@RequestMapping("{id}")
 	public Film getFilm(@PathVariable("id") Integer id) {
 		return filmService.idIleGetir(id).get();
 	}
 	
 	@PostMapping
-	public void yeniFilmEkle(@RequestBody Film film) { // body içinde gelen veri JSON formatında olacak, Spring fw JSON dan Film nesnesine çevirecek
-		filmService.yeniFilmKaydet(film);
+	//@ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity yeniFilmEkle(@RequestBody Film film) { // body içinde gelen veri JSON formatında olacak, Spring fw JSON dan Film nesnesine çevirecek
+		
+		try {
+			filmService.yeniFilmKaydet(film);
+		} catch (IllegalStateException e) {
+			return new ResponseEntity<Film>(film, HttpStatus.BAD_REQUEST);
+		}
+		
+		
+		return new ResponseEntity<Film>(film, HttpStatus.CREATED);
 	}
 	
 	
